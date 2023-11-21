@@ -12,5 +12,8 @@ COPY requirements.txt .
 RUN pip3.9 install --upgrade -r requirements.txt
 
 # Set the command to run when the container starts
-CMD ["tail", "-f", "/dev/null"]
+#CMD ["tail", "-f", "/dev/null"]
+#run main.py
+CMD ["python3.9", "main.py", "3"]
+
 
