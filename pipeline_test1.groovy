@@ -21,29 +21,10 @@ pipeline {
             }
         }
 
-        stage('Check if git repository is cloned') {
-            steps {
-                script {
-                    def gitRepoExists = sh(script: 'ls -a | grep .git', returnStdout: true).trim()
-                    if (gitRepoExists) {
-                        //Print log
-                        echo 'Git repository is cloned'
-                        //Return success
-                        currentBuild.result = 'SUCCESS'
-                    } else {
-                        //Print log
-                        echo 'Git repository is not cloned'
-                        //Return failure
-                        currentBuild.result = 'FAILURE'
-                    }
-                }
-            }
-        }
-
         stage('Start docker image'){
             steps {
                 script {
-                    sh 'docker run --name my_container my_docker_img'
+                    sh 'docker run -d --name my_container my_docker_img'
                 }
             }
         }
@@ -51,7 +32,7 @@ pipeline {
         stage('Start python app'){
             steps {
                 script {
-                    sh 'docker exec -it my_container python main.py 3'
+                    sh 'docker exec my_container python basic_test.py 3'
                 }
             }
         }

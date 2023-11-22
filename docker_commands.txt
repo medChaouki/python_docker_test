@@ -8,7 +8,7 @@ docker images
 docker run -d --name my_container my_docker_image
 
 //exucute python app in container
-docker exec -it my_container python app.py
+docker exec my_container python app.py
 
 //list active containers
 docker ps -a
@@ -16,5 +16,8 @@ docker ps -a
 //stop container
 docker stop my_container
 
-//
+//remove container
 docker rm my_container
+
+//remove image
+docker rmi my_docker_image

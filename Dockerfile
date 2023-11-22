@@ -8,13 +8,14 @@ WORKDIR /app
 # Copy the requirements.txt file to the container
 COPY requirements.txt .
 
-#copy the main.py file to the container
-COPY main.py .
+#copy all python files to the container
+COPY *.py ./
 
 # Install the Python dependencies
 RUN pip3.9 install --upgrade -r requirements.txt
 
 # Set the command to run when the container starts
 CMD ["tail", "-f", "/dev/null"]
+
 
 

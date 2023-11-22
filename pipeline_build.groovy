@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-        stage('Clean up and build Docker image Locally') {
+        stage('Build and Run Docker Locally') {
             steps {
                 script {    
 
@@ -19,7 +19,7 @@ pipeline {
                     // Build Docker image locally using the Dockerfile from the cloned repository
                     def goExitCode = sh(script:  'docker build -t my_docker_img .', returnStatus: true)
                     if (goExitCode != 0) {
-                        sh 'echo hello'
+                        sh 'echo still having the error after the build, just ignore it for now, it is fine'
                     }
 
                 }
@@ -29,7 +29,7 @@ pipeline {
     
     post {
         always {
-            // check if the Docker image exists locally
+            // check if the Docker image is exists locally
             script {
                 def dockerImageExists = sh(script: 'docker images -q my_docker_img', returnStdout: true).trim()
                 if (dockerImageExists) {
