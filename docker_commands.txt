@@ -1,0 +1,20 @@
+//build image
+docker build -t my_docker_image .
+
+//list images
+docker images
+
+//run container
+docker run -d --name my_container my_docker_image
+
+//exucute python app in container
+docker exec -it my_container python app.py
+
+//list active containers
+docker ps -a
+
+//stop container
+docker stop my_container
+
+//
+docker rm my_container
