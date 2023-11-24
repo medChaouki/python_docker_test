@@ -1,12 +1,15 @@
-import random
-import sys
+import serial
+import time
 
-def print_random_numbers(n):
-    for _ in range(n):
-        print(random.randint(1, 100))
+# Open the serial port
+ser = serial.Serial('/dev/ttyACM1', baudrate=9600) 
 
-# Get the number of times to print from the command-line arguments
-num_times = int(sys.argv[1])
+# Read from the serial port for 2 seconds
+end_time = time.time() + 2
+while time.time() < end_time:
+    if ser.in_waiting > 0:
+        line = ser.readline().decode('utf-8').rstrip()
+        print(line)
 
-for _ in range(num_times):
-    print_random_numbers(5)
+# Close the serial port
+ser.close()

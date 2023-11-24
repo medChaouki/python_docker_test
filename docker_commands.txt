@@ -7,8 +7,16 @@ docker images
 //run container
 docker run -d --name my_container my_docker_image
 
+//run container with acces to ttyACM1
+docker run -d --name my_container --device /dev/ttyACM1:/dev/ttyACM1 my_docker_image
+docker run -d --privileged -v /dev/bus/usb:/dev/bus/usb --name my_container my_docker_image
+docker run -d --name my_container --device /dev/ttyACM1:/dev/ttyACM1 my_docker_image
+docker run -d --name my_container --privileged -v /dev:/dev my_docker_image
+docker run -d --name my_container --privileged --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" my_docker_image
+
 //exucute python app in container
 docker exec my_container python app.py
+docker exec -it my_container bash
 
 //list active containers
 docker ps -a
