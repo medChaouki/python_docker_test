@@ -2,18 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Remove all Docker images') {
+        stage('Remove all Docker containers') {
             steps {
                 script {
-                    // List all Docker images
-                    def dockerImages = sh(script: 'docker images -q', returnStdout: true).trim()
+                    // List all Docker containers
+                    def dockerContainers = sh(script: 'docker ps -aq', returnStdout: true).trim()
 
-                    // If there are any Docker images, remove them
-                    if (dockerImages) {
-                        sh 'docker rmi -f $(docker images -q)'
-                        echo 'All Docker images have been removed'
+                    // If there are any Docker containers, remove them
+                    if (dockerContainers) {
+                        sh 'docker rm -f $(docker ps -aq)'
+                        echo 'All Docker containers have been removed'
                     } else {
-                        echo 'No Docker images to remove'
+                        echo 'No Docker containers to remove'
                     }
                 }
             }
